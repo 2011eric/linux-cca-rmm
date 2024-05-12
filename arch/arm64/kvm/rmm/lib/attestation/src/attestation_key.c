@@ -3,7 +3,7 @@
  * SPDX-FileCopyrightText: Copyright TF-RMM Contributors.
  */
 
-#include <assert.h>
+//#include <assert.h>
 #include <attestation.h>
 #include <attestation_priv.h>
 #include <debug.h>

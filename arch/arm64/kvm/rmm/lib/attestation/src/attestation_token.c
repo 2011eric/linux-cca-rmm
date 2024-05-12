@@ -9,7 +9,7 @@
  *    trusted-firmware-m/secure_fw/partitions/initial_attestation/attest_token_encode.c
  */
 
-#include <assert.h>
+//#include <assert.h>
 #include <attestation.h>
 #include <attestation_defs_priv.h>
 #include <attestation_priv.h>

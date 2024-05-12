@@ -1,5 +1,5 @@
 #include <linux/printk.h>
-#include <stddef.h>
+#include <linux/stddef.h>
 
 
 // #define SMC_RESULT_REGS		5U
@@ -25,18 +25,17 @@
 
 #include <arch.h>
 #include <arch_helpers.h>
-#include <assert.h>
 #include <buffer.h>
 #include <cpuid.h>
-#include <debug.h>
-#include <run.h>
-#include <simd.h>
+// #include <debug.h>
+// #include <run.h>
+//#include <simd.h>
 #include <smc-handler.h>
 #include <smc-rmi.h>
 #include <smc.h>
-#include <status.h>
+//#include <status.h>
 #include <utils_def.h>
-#include <xlat_high_va.h>
+//#include <xlat_high_va.h>
 
 /* Maximum number of supported arguments */
 #define MAX_NUM_ARGS		5U

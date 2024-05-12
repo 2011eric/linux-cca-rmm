@@ -10,8 +10,8 @@
 
 #include <arch.h>
 #include <instr_helpers.h>
-#include <stdbool.h>
-#include <stddef.h>
+// #include <stdbool.h>
+// #include <stddef.h>
 
 /* Define read function for system register */
 #define DEFINE_SYSREG_READ_FUNC(_name)			\

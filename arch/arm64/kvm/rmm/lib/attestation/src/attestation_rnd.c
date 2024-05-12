@@ -4,7 +4,7 @@
  */
 
 #include <arch_features.h>
-#include <assert.h>
+//#include <assert.h>
 #include <attestation.h>
 #include <attestation_priv.h>
 #include <cpuid.h>

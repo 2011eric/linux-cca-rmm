@@ -6,7 +6,7 @@
 #ifndef GRANULE_H
 #define GRANULE_H
 
-#include <assert.h>
+//#include <assert.h>
 #include <atomics.h>
 #include <buffer.h>
 #include <errno.h>

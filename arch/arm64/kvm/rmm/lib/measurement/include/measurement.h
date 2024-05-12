@@ -6,7 +6,7 @@
 #ifndef MEASUREMENT_H
 #define MEASUREMENT_H
 
-#include <assert.h>
+//#include <assert.h>
 #include <smc-rmi.h>
 #include <stdbool.h>
 #include <stddef.h>

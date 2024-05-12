@@ -17,7 +17,7 @@
  */
 
 #include <arch_helpers.h>
-#include <assert.h>
+//#include <assert.h>
 #include <cpuid.h>
 #include <debug.h>
 #include <errno.h>

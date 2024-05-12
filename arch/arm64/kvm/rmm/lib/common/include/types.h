@@ -5,10 +5,9 @@
 
 #ifndef TYPES_H
 #define TYPES_H
+#include <linux/types.h>
 
-#include <stdint.h>
-
-typedef uint64_t u_register_t;
-typedef int64_t register_t;
+typedef __u64 u_register_t;
+typedef long long register_t;
 
 #endif /* TYPES_H */

@@ -4,7 +4,7 @@
  */
 
 #include <arch_features.h>
-#include <assert.h>
+//#include <assert.h>
 #include <errno.h>
 #include <host_utils.h>
 #include <stdlib.h>

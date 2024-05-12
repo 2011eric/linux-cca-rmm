@@ -4,7 +4,7 @@
  */
 
 #include <arch_helpers.h>
-#include <assert.h>
+//#include <assert.h>
 #include <bitmap.h>
 #include <granule.h>
 #include <ripas.h>

@@ -6,7 +6,7 @@
 #ifndef REALM_H
 #define REALM_H
 
-#include <assert.h>
+//#include <assert.h>
 #include <measurement.h>
 #include <memory.h>
 #include <rec.h>

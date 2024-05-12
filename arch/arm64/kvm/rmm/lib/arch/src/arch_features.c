@@ -6,7 +6,7 @@
 #include <arch.h>
 #include <arch_features.h>
 #include <arch_helpers.h>
-#include <assert.h>
+//#include <assert.h>
 #include <stdint.h>
 #include <utils_def.h>
 

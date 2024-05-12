@@ -7,7 +7,7 @@
 /* This file is derived from xlat_table_v2 library in TF-A project */
 
 #include <arch_helpers.h>
-#include <assert.h>
+//#include <assert.h>
 #include <debug.h>
 #include <errno.h>
 #include <stdbool.h>

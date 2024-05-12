@@ -5,7 +5,7 @@
 
 #include <arch.h>
 #include <arch_helpers.h>
-#include <assert.h>
+//#include <assert.h>
 #include <buffer.h>
 #include <buffer_private.h>
 #include <cpuid.h>

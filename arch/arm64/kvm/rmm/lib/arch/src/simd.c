@@ -5,7 +5,7 @@
 
 #include <arch_features.h>
 #include <arch_helpers.h>
-#include <assert.h>
+//#include <assert.h>
 #include <cpuid.h>
 #include <simd.h>
 #include <simd_private.h>

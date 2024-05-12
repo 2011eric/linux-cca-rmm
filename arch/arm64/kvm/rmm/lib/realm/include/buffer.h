@@ -6,10 +6,10 @@
 #ifndef BUFFER_H
 #define BUFFER_H
 
-#include <assert.h>
+// //#include <assert.h>
 #include <smc-rmi.h>
-#include <stdbool.h>
-#include <stddef.h>
+// #include <stdbool.h>
+// #include <stddef.h>
 #include <utils_def.h>
 
 enum buffer_slot {

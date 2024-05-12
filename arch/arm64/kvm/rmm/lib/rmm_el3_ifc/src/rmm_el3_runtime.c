@@ -3,7 +3,7 @@
  * SPDX-FileCopyrightText: Copyright TF-RMM Contributors.
  */
 
-#include <assert.h>
+//#include <assert.h>
 #include <debug.h>
 #include <rmm_el3_ifc.h>
 #include <rmm_el3_ifc_priv.h>

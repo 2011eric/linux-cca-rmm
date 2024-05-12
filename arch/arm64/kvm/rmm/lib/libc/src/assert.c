@@ -4,7 +4,7 @@
  */
 
 #include <arch_helpers.h>
-#include <assert.h>
+//#include <assert.h>
 #include <debug.h>
 
 __dead2 void __assert_func(const char *file, int line,

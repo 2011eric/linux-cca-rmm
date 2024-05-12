@@ -4,7 +4,7 @@
  */
 
 #include <arch_helpers.h>
-#include <assert.h>
+//#include <assert.h>
 #include <buffer.h>
 #include <debug.h>
 #include <granule.h>

@@ -46,7 +46,7 @@
 
 #ifndef __ASSEMBLER__
 #include <arch_features.h>
-#include <assert.h>
+//#include <assert.h>
 #include <stddef.h>
 
 /* Flags for SIMD type */

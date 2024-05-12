@@ -7,7 +7,7 @@
 #define ESR_H
 
 #include <arch.h>
-#include <assert.h>
+//#include <assert.h>
 #include <stdbool.h>
 #include <utils_def.h>
 

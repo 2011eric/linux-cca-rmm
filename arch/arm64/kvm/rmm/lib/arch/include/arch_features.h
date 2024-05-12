@@ -7,7 +7,7 @@
 #define ARCH_FEATURES_H
 
 #include <arch_helpers.h>
-#include <stdbool.h>
+// #include <stdbool.h>
 
 static inline bool is_armv8_4_ttst_present(void)
 {
