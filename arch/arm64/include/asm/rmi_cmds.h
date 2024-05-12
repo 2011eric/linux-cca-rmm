@@ -10,6 +10,30 @@
 
 #include <asm/rmi_smc.h>
 
+extern void  __rmm_entry(unsigned int function_id,
+		   unsigned long arg0,
+		   unsigned long arg1,
+		   unsigned long arg2,
+		   unsigned long arg3,
+		   unsigned long arg4,
+		   unsigned long arg5,
+		   struct smc_result *res);
+
+
+//#undef __arm_smccc_1_1
+#define arm_pseudo_smccc_1_1_smc(...)	__arm_pseudo_smccc_1_1(SMCCC_SMC_INST, __VA_ARGS__)
+#define __arm_pseudo_smccc_1_1(inst, ...)					\
+	do {								\
+		register unsigned long r0 asm("r0");			\
+		register unsigned long r1 asm("r1");			\
+		register unsigned long r2 asm("r2");			\
+		register unsigned long r3 asm("r3"); 			\
+		CONCATENATE(__declare_arg_,				\
+			    COUNT_ARGS(__VA_ARGS__))(__VA_ARGS__);	\
+		__rmm_entry();                         \
+		if (___res)						\
+			*___res = (typeof(*___res)){r0, r1, r2, r3};	\
+	} while (0)
 struct rtt_entry {
 	unsigned long walk_level;
 	unsigned long desc;
@@ -33,8 +57,9 @@ static inline int rmi_data_create(unsigned long rd, unsigned long data,
 				  unsigned long ipa, unsigned long src,
 				  unsigned long flags)
 {
-	struct arm_smccc_res res;
-
+	struct arm_smccc_res res;//, pseudo_res;
+	// arm_pseudo_smccc_1_1_smc(SMC_RMI_DATA_CREATE, rd, data, ipa, src,
+	// 		     flags, &pseudo_res);
 	arm_smccc_1_1_invoke(SMC_RMI_DATA_CREATE, rd, data, ipa, src,
 			     flags, &res);
 
@@ -192,8 +217,8 @@ static inline int rmi_realm_activate(unsigned long rd)
  */
 static inline int rmi_realm_create(unsigned long rd, unsigned long params_ptr)
 {
-	struct arm_smccc_res res;
-
+	struct arm_smccc_res res, pseudo_res;
+	__rmm_entry(SMC_RMI_REALM_CREATE, rd, params_ptr, &pseudo_res, 0, 0, 0, 0);
 	arm_smccc_1_1_invoke(SMC_RMI_REALM_CREATE, rd, params_ptr, &res);
 
 	return res.a0;

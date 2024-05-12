@@ -8,7 +8,6 @@
 #include <linux/args.h>
 #include <linux/init.h>
 #include <uapi/linux/const.h>
-
 /*
  * This file provides common defines for ARM SMC Calling Convention as
  * specified in
@@ -224,7 +223,6 @@ enum arm_smccc_conduit arm_smccc_1_1_get_conduit(void);
  * handling SMCCCv1.0 must determine the conduit by other means.
  */
 u32 arm_smccc_get_version(void);
-
 void __init arm_smccc_version_init(u32 version, enum arm_smccc_conduit conduit);
 
 extern u64 smccc_has_sve_hint;
@@ -495,6 +493,10 @@ asmlinkage void __arm_smccc_hvc(unsigned long a0, unsigned long a1,
 		if (___res)						\
 			*___res = (typeof(*___res)){r0, r1, r2, r3};	\
 	} while (0)
+
+
+
+
 
 /*
  * arm_smccc_1_1_smc() - make an SMCCC v1.1 compliant SMC call
