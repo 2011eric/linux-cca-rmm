@@ -28,7 +28,8 @@
 // # define  LL(_x)	(_x)
 // #else
 # define   U(_x)	(unsigned int)(_x)
-// # define  UL(_x)	(_x##UL)
+# undef UL
+# define  UL(_x)	(_x##UL)
 // # define ULL(_x)	(_x##ULL)
 // # define   L(_x)	(_x##L)
 // # define  LL(_x)	(_x##LL)
@@ -143,7 +144,7 @@
 			(((uintptr_t)(_addr) >= (uintptr_t)&(_array)[0]) && \
 			 ((((uintptr_t)(_addr) - (uintptr_t)&(_array)[0]) % \
 						sizeof((_array)[0])) == UL(0)))
-
+#define GRANULE_SHIFT   12
 #define GRANULE_SIZE	(UL(1) << GRANULE_SHIFT)
 #define GRANULE_MASK	(~(GRANULE_SIZE - 1U))
 
@@ -251,4 +252,5 @@
 
 #endif /* !(defined(__ASSEMBLER__) || defined(__LINKER__)) */
 
+#define MAX_CPUS 4 // FIXME: I forgot why I add this...
 #endif /* UTILS_DEF_H */
