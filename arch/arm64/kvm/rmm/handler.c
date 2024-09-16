@@ -28,8 +28,8 @@
 #include <buffer.h>
 #include <cpuid.h>
 // #include <debug.h>
-// #include <run.h>
-//#include <simd.h>
+#include <run.h>
+#include <simd.h>
 #include <smc-handler.h>
 #include <smc-rmi.h>
 #include <smc.h>
@@ -176,18 +176,18 @@ static const struct smc_handler smc_handlers[] = {
 
 // COMPILER_ASSERT(ARRAY_LEN(smc_handlers) == SMC64_NUM_FIDS_IN_RANGE(RMI));
 
-// static inline bool rmi_handler_needs_fpu(unsigned int id)
-// {
-// #ifdef RMM_FPU_USE_AT_REL2
-// 	if ((id == SMC_RMM_REALM_CREATE) || (id == SMC_RMM_DATA_CREATE) ||
-// 	    (id == SMC_RMM_REC_CREATE) || (id == SMC_RMM_RTT_INIT_RIPAS)) {
-// 		return true;
-// 	}
-// #else
-// 	(void)id;
-// #endif
-// 	return false;
-// }
+static inline bool rmi_handler_needs_fpu(unsigned int id)
+{
+#ifdef RMM_FPU_USE_AT_REL2
+	if ((id == SMC_RMM_REALM_CREATE) || (id == SMC_RMM_DATA_CREATE) ||
+	    (id == SMC_RMM_REC_CREATE) || (id == SMC_RMM_RTT_INIT_RIPAS)) {
+		return true;
+	}
+#else
+	(void)id;
+#endif
+	return false;
+}
 
 // static void rmi_log_on_exit(unsigned int handler_id,
 // 			    unsigned long args[],
@@ -211,7 +211,7 @@ static const struct smc_handler smc_handlers[] = {
 
 // 		/* Print arguments */
 // 		num = (unsigned int)handler->type & 0xFFU;
-// 		assert(num <= MAX_NUM_ARGS);
+// 		// assert(num <= MAX_NUM_ARGS);
 
 // 		for (unsigned int i = 0U; i < num; i++) {
 // 			INFO(" %lx", args[i]);
@@ -237,7 +237,7 @@ static const struct smc_handler smc_handlers[] = {
 // 		    (function_id == SMC_RMM_DATA_DESTROY)))) {
 // 			/* Print output values */
 // 			num = ((unsigned int)handler->type >> 8) & 0xFFU;
-// 			assert(num <= MAX_NUM_OUTPUT_VALS);
+// 			// assert(num <= MAX_NUM_OUTPUT_VALS);
 
 // 			for (unsigned int i = 1U; i <= num; i++) {
 // 				INFO(" %lx", res->x[i]);
@@ -278,91 +278,91 @@ void handle_ns_smc(unsigned int function_id,
 			handler = &smc_handlers[handler_id];
 		}
 	}
-	pr_info("function_id: %lx\n", function_id);
-    pr_info("arg0: %lx, arg1: %lx, arg2: %lx, arg3: %lx, arg4: %lx, arg5: %lx\n", arg0, arg1, arg2, arg3, arg4, arg5);
+    
 	return;
-	// /*
-	//  * Check if handler exists and 'fn_dummy' is not NULL
-	//  * for not implemented 'function_id' calls in SMC RMI range.
-	//  */
-	// if ((handler == NULL) || (handler->fn_dummy == NULL)) {
-	// 	VERBOSE("[%s] unknown function_id: %x\n",
-	// 		__func__, function_id);
-	// 	res->x[0] = SMC_UNKNOWN;
-	// 	return;
-	// }
+	/*
+	 * Check if handler exists and 'fn_dummy' is not NULL
+	 * for not implemented 'function_id' calls in SMC RMI range.
+	 */
+	if ((handler == NULL) || (handler->fn_dummy == NULL)) {
+		pr_info("[%s] unknown function_id: %x\n",
+			__func__, function_id);
+		res->x[0] = SMC_UNKNOWN;
+		return;
+	}
 
-	// assert(check_cpu_slots_empty());
+	// // assert(check_cpu_slots_empty());
 
 	// /* Current CPU's SIMD state must not be saved when entering RMM */
-	// assert(simd_is_state_saved() == false);
+	// // assert(simd_is_state_saved() == false);
 
-	// /* Get current CPU's NS SIMD context */
-	// ns_simd_ctx = get_cpu_ns_simd_context();
+	/* Get current CPU's NS SIMD context */
+	ns_simd_ctx = get_cpu_ns_simd_context();
 
-	// /* Set or clear SVE hint bit in the NS SIMD context */
-	// simd_update_smc_sve_hint(ns_simd_ctx, sve_hint);
+	/* Set or clear SVE hint bit in the NS SIMD context */
+	simd_update_smc_sve_hint(ns_simd_ctx, sve_hint);
 
-	// /* If the handler needs FPU, actively save NS simd context. */
-	// if (rmi_handler_needs_fpu(function_id) == true) {
-	// 	simd_context_save(ns_simd_ctx);
-	// 	restore_ns_simd_state = true;
-	// }
+	/* If the handler needs FPU, actively save NS simd context. */
+	if (rmi_handler_needs_fpu(function_id) == true) {
+		simd_context_save(ns_simd_ctx);
+		restore_ns_simd_state = true;
+	}
 
-	// switch (handler->type) {
-	// case rmi_type_00:
-	// 	res->x[0] = handler->f_00();
-	// 	break;
-	// case rmi_type_10:
-	// 	res->x[0] = handler->f_10(arg0);
-	// 	break;
-	// case rmi_type_20:
-	// 	res->x[0] = handler->f_20(arg0, arg1);
-	// 	break;
-	// case rmi_type_30:
-	// 	res->x[0] = handler->f_30(arg0, arg1, arg2);
-	// 	break;
-	// case rmi_type_40:
-	// 	res->x[0] = handler->f_40(arg0, arg1, arg2, arg3);
-	// 	break;
-	// case rmi_type_50:
-	// 	res->x[0] = handler->f_50(arg0, arg1, arg2, arg3, arg4);
-	// 	break;
-	// case rmi_type_11:
-	// 	handler->f_11(arg0, res);
-	// 	break;
-	// case rmi_type_12:
-	// 	handler->f_12(arg0, res);
-	// 	break;
-	// case rmi_type_22:
-	// 	handler->f_22(arg0, arg1, res);
-	// 	break;
-	// case rmi_type_31:
-	// 	handler->f_31(arg0, arg1, arg2, res);
-	// 	break;
-	// case rmi_type_32:
-	// 	handler->f_32(arg0, arg1, arg2, res);
-	// 	break;
-	// case rmi_type_34:
-	// 	handler->f_34(arg0, arg1, arg2, res);
-	// 	break;
-	// case rmi_type_41:
-	// 	handler->f_41(arg0, arg1, arg2, arg3, res);
-	// 	break;
-	// default:
-	// 	assert(false);
-	// }
+	switch (handler->type) {
+	case rmi_type_00:
+		res->x[0] = handler->f_00();
+		break;
+	case rmi_type_10:
+		res->x[0] = handler->f_10(arg0);
+		break;
+	case rmi_type_20:
+		res->x[0] = handler->f_20(arg0, arg1);
+		break;
+	case rmi_type_30:
+		res->x[0] = handler->f_30(arg0, arg1, arg2);
+		break;
+	case rmi_type_40:
+		res->x[0] = handler->f_40(arg0, arg1, arg2, arg3);
+		break;
+	case rmi_type_50:
+		res->x[0] = handler->f_50(arg0, arg1, arg2, arg3, arg4);
+		break;
+	case rmi_type_11:
+		handler->f_11(arg0, res);
+		break;
+	case rmi_type_12:
+		handler->f_12(arg0, res);
+		break;
+	case rmi_type_22:
+		handler->f_22(arg0, arg1, res);
+		break;
+	case rmi_type_31:
+		handler->f_31(arg0, arg1, arg2, res);
+		break;
+	case rmi_type_32:
+		handler->f_32(arg0, arg1, arg2, res);
+		break;
+	case rmi_type_34:
+		handler->f_34(arg0, arg1, arg2, res);
+		break;
+	case rmi_type_41:
+		handler->f_41(arg0, arg1, arg2, arg3, res);
+		break;
+	default:
+		// // assert(false);
+		pr_info("INVALID RMI handler type\n");
+	}
 
 	// rmi_log_on_exit(handler_id, args, res);
 
-	// /* If the handler uses FPU, restore the saved NS simd context. */
-	// if (restore_ns_simd_state) {
-	// 	simd_context_restore(ns_simd_ctx);
-	// }
+	/* If the handler uses FPU, restore the saved NS simd context. */
+	if (restore_ns_simd_state) {
+		simd_context_restore(ns_simd_ctx);
+	}
 
 	// /* Current CPU's SIMD state must not be saved when exiting RMM */
-	// assert(simd_is_state_saved() == false);
-	// assert(check_cpu_slots_empty());
+	// // assert(simd_is_state_saved() == false);
+	// // assert(check_cpu_slots_empty());
 }
 
 // /*

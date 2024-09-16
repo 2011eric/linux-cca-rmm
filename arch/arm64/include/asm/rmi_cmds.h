@@ -7,9 +7,12 @@
 #define __ASM_RMI_CMDS_H
 
 #include <linux/arm-smccc.h>
-
+#define SMC_RESULT_REGS 5
 #include <asm/rmi_smc.h>
 
+struct smc_result {
+	unsigned long x[SMC_RESULT_REGS];
+};
 extern void  __rmm_entry(unsigned int function_id,
 		   unsigned long arg0,
 		   unsigned long arg1,
@@ -124,6 +127,10 @@ static inline int rmi_features(unsigned long index, unsigned long *out)
 {
 	struct arm_smccc_res res;
 
+	struct smc_result rmm_result;
+	__rmm_entry(SMC_RMI_FEATURES, index, 0, 0, 0, 0, 0, &rmm_result);
+	res.a0 = rmm_result.x[1];
+	res.a1 = rmm_result.x[2];
 	arm_smccc_1_1_invoke(SMC_RMI_FEATURES, index, &res);
 
 	*out = res.a1;
@@ -217,8 +224,8 @@ static inline int rmi_realm_activate(unsigned long rd)
  */
 static inline int rmi_realm_create(unsigned long rd, unsigned long params_ptr)
 {
-	struct arm_smccc_res res, pseudo_res;
-	__rmm_entry(SMC_RMI_REALM_CREATE, rd, params_ptr, &pseudo_res, 0, 0, 0, 0);
+	struct arm_smccc_res res;
+
 	arm_smccc_1_1_invoke(SMC_RMI_REALM_CREATE, rd, params_ptr, &res);
 
 	return res.a0;
