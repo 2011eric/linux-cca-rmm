@@ -7,7 +7,7 @@
 #define MMIO_H
 
 #include <arch_helpers.h>
-#include <stdint.h>
+// #include <stdint.h>>
 
 static inline uint8_t read8(volatile void *addr)
 {

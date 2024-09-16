@@ -51,8 +51,8 @@
 #include "printf_config.h"
 #endif
 
-#include <stdbool.h>
-#include <stdint.h>
+// #include <stdbool.h>
+// #include <stdint.h>>
 #include <stdio.h>
 
 /*

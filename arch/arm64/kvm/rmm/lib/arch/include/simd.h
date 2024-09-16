@@ -47,7 +47,7 @@
 #ifndef __ASSEMBLER__
 #include <arch_features.h>
 //#include <assert.h>
-#include <stddef.h>
+// #include <stddef.h>
 
 /* Flags for SIMD type */
 #define SIMD_TFLAG_SVE		(U(1) << 0)

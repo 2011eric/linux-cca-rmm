@@ -7,7 +7,7 @@
 #include <attestation.h>
 #include <attestation_priv.h>
 #include <debug.h>
-#include <errno.h>
+#include <linux/errno.h>
 #include <mbedtls/memory_buffer_alloc.h>
 #include <memory_alloc.h>
 #include <psa/crypto.h>

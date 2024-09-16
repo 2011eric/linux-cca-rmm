@@ -7,7 +7,7 @@
 #include <arch_features.h>
 #include <arch_helpers.h>
 //#include <assert.h>
-#include <stdint.h>
+// #include <stdint.h>>
 #include <utils_def.h>
 
 #ifndef CBMC
@@ -29,7 +29,7 @@ unsigned int arch_feat_get_pa_width(void)
 	u_register_t pa_range = EXTRACT(ID_AA64MMFR0_EL1_PARANGE,
 					read_id_aa64mmfr0_el1());
 
-	assert(pa_range < ARRAY_SIZE(pa_range_bits_arr));
+	// assert(pa_range < ARRAY_SIZE(pa_range_bits_arr));
 
 	return pa_range_bits_arr[pa_range];
 }

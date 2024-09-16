@@ -6,7 +6,7 @@
 #ifndef ATTESTATION_H
 #define ATTESTATION_H
 
-#include <stddef.h>
+// #include <stddef.h>
 
 struct buffer_alloc_ctx;
 

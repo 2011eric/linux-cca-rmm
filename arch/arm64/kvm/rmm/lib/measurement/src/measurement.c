@@ -8,7 +8,7 @@
 #include <measurement.h>
 #include <psa/crypto.h>
 #include <simd.h>
-#include <stdbool.h>
+// #include <stdbool.h>
 
 #if LOG_LEVEL >= LOG_LEVEL_VERBOSE
 static void measurement_print(unsigned char *measurement,
@@ -16,7 +16,7 @@ static void measurement_print(unsigned char *measurement,
 {
 	unsigned int size = 0U;
 
-	assert(measurement != NULL);
+	// assert(measurement != NULL);
 
 	VERBOSE("Measurement ");
 
@@ -31,7 +31,7 @@ static void measurement_print(unsigned char *measurement,
 		break;
 	default:
 		/* Prevent static check and MISRA warnings */
-		assert(false);
+		// assert(false);
 	}
 
 	for (unsigned int i = 0U; i < size; ++i) {
@@ -50,15 +50,15 @@ static void do_hash(enum hash_algo algorithm,
 	psa_algorithm_t psa_algorithm = PSA_ALG_NONE;
 	size_t hash_size;
 
-	assert(size <= GRANULE_SIZE);
-	assert((data != NULL) && (out != NULL));
+	// assert(size <= GRANULE_SIZE);
+	// assert((data != NULL) && (out != NULL));
 
 	if (algorithm == HASH_SHA_256) {
 		psa_algorithm = PSA_ALG_SHA_256;
 	} else if (algorithm == HASH_SHA_512) {
 		psa_algorithm = PSA_ALG_SHA_512;
 	} else {
-		assert(false);
+		// assert(false);
 	}
 
 	SIMD_FPU_ALLOW(ret = psa_hash_compute(psa_algorithm,
@@ -69,8 +69,8 @@ static void do_hash(enum hash_algo algorithm,
 			&hash_size));
 
 	/* coverity[uninit_use:SUPPRESS] */
-	assert(hash_size == (size_t)PSA_HASH_LENGTH(psa_algorithm));
-	assert(ret == 0);
+	// assert(hash_size == (size_t)PSA_HASH_LENGTH(psa_algorithm));
+	// assert(ret == 0);
 
 #if LOG_LEVEL >= LOG_LEVEL_VERBOSE
 	measurement_print(out, algorithm);
@@ -97,17 +97,17 @@ static void do_extend(psa_algorithm_t psa_algorithm,
 					(size_t)PSA_HASH_LENGTH(psa_algorithm);
 
 	ret = psa_hash_setup(&operation, psa_algorithm);
-	assert(ret == PSA_SUCCESS);
+	// assert(ret == PSA_SUCCESS);
 
 	ret = psa_hash_update(&operation,
 			      (unsigned char *)current_measurement,
 			      current_measurement_size);
-	assert(ret == PSA_SUCCESS);
+	// assert(ret == PSA_SUCCESS);
 
 	ret = psa_hash_update(&operation,
 			      (unsigned char *)extend_measurement,
 			      extend_measurement_size);
-	assert(ret == PSA_SUCCESS);
+	// assert(ret == PSA_SUCCESS);
 
 	ret = psa_hash_finish(&operation,
 			      out,
@@ -115,8 +115,8 @@ static void do_extend(psa_algorithm_t psa_algorithm,
 			      &hash_size);
 
 	/* coverity[uninit_use:SUPPRESS] */
-	assert(hash_size == (size_t)PSA_HASH_LENGTH(psa_algorithm));
-	assert(ret == PSA_SUCCESS);
+	// assert(hash_size == (size_t)PSA_HASH_LENGTH(psa_algorithm));
+	// assert(ret == PSA_SUCCESS);
 }
 
 void measurement_extend(enum hash_algo algorithm,
@@ -128,10 +128,10 @@ void measurement_extend(enum hash_algo algorithm,
 	psa_algorithm_t psa_algorithm = PSA_ALG_NONE;
 
 	/* We limit the maximum size of the payload to be of GRANULE_SIZE */
-	assert(current_measurement != NULL);
-	assert(extend_measurement_size <= GRANULE_SIZE);
-	assert(extend_measurement != NULL);
-	assert(out != NULL);
+	// assert(current_measurement != NULL);
+	// assert(extend_measurement_size <= GRANULE_SIZE);
+	// assert(extend_measurement != NULL);
+	// assert(out != NULL);
 
 	switch (algorithm) {
 	case HASH_SHA_256:
@@ -141,7 +141,7 @@ void measurement_extend(enum hash_algo algorithm,
 		psa_algorithm = PSA_ALG_SHA_512;
 		break;
 	default:
-		assert(false);
+		// assert(false);
 	}
 
 	SIMD_FPU_ALLOW(

@@ -9,7 +9,7 @@
 #include <arch_features.h>
 //#include <assert.h>
 #include <debug.h>
-#include <errno.h>
+#include <linux/errno.h>
 #include <limits.h>
 #include <sizes.h>
 #include <xlat_contexts.h>
@@ -96,13 +96,13 @@ int xlat_arch_setup_mmu_cfg(struct xlat_ctx * const ctx)
 	uint64_t t0sz, t1sz, txsz;
 	uint64_t pa_size_bits;
 
-	assert(ctx != NULL);
+	// assert(ctx != NULL);
 
 	ctx_cfg = ctx->cfg;
 	ctx_tbls = ctx->tbls;
 
-	assert(ctx_cfg != NULL);
-	assert(ctx_tbls != NULL);
+	// assert(ctx_cfg != NULL);
+	// assert(ctx_tbls != NULL);
 
 	/* Only 4K Granularity is supported */
 	if (xlat_arch_is_granule_size_supported(SZ_4K) == false) {

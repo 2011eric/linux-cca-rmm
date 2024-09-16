@@ -6,8 +6,8 @@
 #ifndef ATOMICS_H
 #define ATOMICS_H
 
-#include <stdbool.h>
-#include <stdint.h>
+// #include <stdbool.h>
+// #include <stdint.h>
 
 /*
  * Atomically adds @val to the 64-bit value stored at memory location @loc.

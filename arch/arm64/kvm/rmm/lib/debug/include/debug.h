@@ -8,7 +8,7 @@
 
 #ifndef __ASSEMBLER__
 #include <stdarg.h>
-#include <stdbool.h>
+// #include <stdbool.h>
 #include <stdio.h>
 #endif
 #include <utils_def.h>

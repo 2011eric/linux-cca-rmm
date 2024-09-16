@@ -9,7 +9,7 @@
 #include <arch_features.h>
 #include <granule_types.h>
 #include <memory.h>
-#include <stdbool.h>
+// #include <stdbool.h>
 
 /*
  * Stage 2 configuration of the Realm

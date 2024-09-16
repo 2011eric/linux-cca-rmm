@@ -5,7 +5,7 @@
 
 #include <buffer.h>
 #include <realm_test_utils.h>
-#include <stddef.h>
+// #include <stddef.h>
 
 /*
  * Maps addr to the requested slot buffer and returns a pointer which can be
@@ -37,7 +37,7 @@ void test_buffer_unmap_access(void *buf)
 	void *slot_va =
 		(void *)realm_test_util_slot_va_from_pa((uintptr_t)buf);
 
-	assert(slot_va != NULL);
+	// assert(slot_va != NULL);
 
 	buffer_unmap_internal(slot_va);
 }

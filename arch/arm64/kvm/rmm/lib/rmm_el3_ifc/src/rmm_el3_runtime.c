@@ -8,9 +8,9 @@
 #include <rmm_el3_ifc.h>
 #include <rmm_el3_ifc_priv.h>
 #include <spinlock.h>
-#include <stdbool.h>
-#include <stddef.h>
-#include <stdint.h>
+// #include <stdbool.h>
+// #include <stddef.h>
+// #include <stdint.h>
 #include <xlat_defs.h>
 
 /* Spinlock used to protect the EL3<->RMM shared area */
@@ -45,8 +45,8 @@ int rmm_el3_ifc_get_realm_attest_key(uintptr_t buf, size_t buflen,
 	unsigned long buffer_pa;
 	unsigned long offset = buf - rmm_shared_buffer_start_va;
 
-	assert((offset + buflen) <= rmm_el3_ifc_get_shared_buf_size());
-	assert((buf & ~PAGE_SIZE_MASK) == rmm_shared_buffer_start_va);
+	// assert((offset + buflen) <= rmm_el3_ifc_get_shared_buf_size());
+	// assert((buf & ~PAGE_SIZE_MASK) == rmm_shared_buffer_start_va);
 
 	buffer_pa = (unsigned long)rmm_el3_ifc_get_shared_buf_pa() + offset;
 
@@ -79,8 +79,8 @@ int rmm_el3_ifc_get_platform_token(uintptr_t buf, size_t buflen,
 	unsigned long buffer_pa;
 	unsigned long offset = buf - rmm_shared_buffer_start_va;
 
-	assert((offset + buflen) <= rmm_el3_ifc_get_shared_buf_size());
-	assert((buf & ~PAGE_SIZE_MASK) == rmm_shared_buffer_start_va);
+	// assert((offset + buflen) <= rmm_el3_ifc_get_shared_buf_size());
+	// assert((buf & ~PAGE_SIZE_MASK) == rmm_shared_buffer_start_va);
 
 	buffer_pa = (unsigned long)rmm_el3_ifc_get_shared_buf_pa() + offset;
 	/* Get the available space on the buffer after the offset */

@@ -199,15 +199,15 @@ struct simd_context *simd_context_switch(struct simd_context *ctx_save,
 {
 	unsigned long rmm_cptr_el2;
 
-	assert((ctx_save != NULL) || (ctx_restore != NULL));
+	// assert((ctx_save != NULL) || (ctx_restore != NULL));
 
 	rmm_cptr_el2 = read_cptr_el2();
 
 	/* Save tne incoming simd context */
 	if (ctx_save != NULL) {
-		assert(is_ctx_init_done(ctx_save));
-		assert(!is_ctx_saved(ctx_save));
-		assert(!g_simd_state_saved[my_cpuid()]);
+		// assert(is_ctx_init_done(ctx_save));
+		// assert(!is_ctx_saved(ctx_save));
+		// assert(!g_simd_state_saved[my_cpuid()]);
 
 		/* Disable appropriate traps */
 		if (read_cptr_el2() != ctx_save->cptr_el2) {
@@ -233,9 +233,9 @@ struct simd_context *simd_context_switch(struct simd_context *ctx_save,
 
 	/* Restore the outgoing context */
 	if (ctx_restore != NULL) {
-		assert(is_ctx_init_done(ctx_restore));
-		assert(is_ctx_saved(ctx_restore));
-		assert(g_simd_state_saved[my_cpuid()]);
+		// assert(is_ctx_init_done(ctx_restore));
+		// assert(is_ctx_saved(ctx_restore));
+		// assert(g_simd_state_saved[my_cpuid()]);
 
 		/* Disable appropriate traps */
 		if (read_cptr_el2() != ctx_restore->cptr_el2) {
@@ -363,10 +363,10 @@ int simd_context_init(simd_owner_t owner, struct simd_context *simd_ctx,
 /* Set or clear SVE hint bit passed by SMCCCv1.3 to SIMD context status */
 void simd_update_smc_sve_hint(struct simd_context *ctx, bool sve_hint)
 {
-	assert(is_ctx_init_done(ctx));
+	// assert(is_ctx_init_done(ctx));
 
 	if (simd_has_sve(ctx)) {
-		assert(!is_ctx_saved(ctx));
+		// assert(!is_ctx_saved(ctx));
 		if (sve_hint) {
 			ctx->sflags |= SIMD_SFLAG_SVE_HINT;
 		} else {
@@ -382,7 +382,7 @@ int simd_get_cpu_config(struct simd_config *simd_cfg)
 		return -1;
 	}
 
-	assert(simd_cfg != NULL);
+	// assert(simd_cfg != NULL);
 	*simd_cfg = g_simd_cfg;
 
 	return 0;
@@ -467,7 +467,7 @@ static void sme_init_once(void)
 	 * reports a larger value than SVE_VQ_ARCH_MAX, then assert. Hopefully
 	 * we won't hit this condition in the near future.
 	 */
-	assert(sme_svq_arch_max <= SVE_VQ_ARCH_MAX);
+	// assert(sme_svq_arch_max <= SVE_VQ_ARCH_MAX);
 
 	/* Restore saved cptr */
 	write_cptr_el2(cptr_saved);

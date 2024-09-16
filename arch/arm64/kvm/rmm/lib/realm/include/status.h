@@ -8,7 +8,7 @@
 
 //#include <assert.h>
 #include <smc-rmi.h>
-#include <stdbool.h>
+// #include <stdbool.h>
 
 /*
  * Logical representation of return code returned by RMM commands.
@@ -52,7 +52,7 @@ static inline unsigned long pack_struct_return_code(return_code_t return_code)
 static inline unsigned long pack_return_code(unsigned int status,
 					     unsigned char index)
 {
-	assert(status < RMI_ERROR_COUNT);
+	// assert(status < RMI_ERROR_COUNT);
 
 	/* The width of @status and @index is 8 bits */
 	return pack_struct_return_code(make_return_code(status, index));

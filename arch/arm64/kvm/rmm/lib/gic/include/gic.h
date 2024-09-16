@@ -6,7 +6,7 @@
 #ifndef GIC_H
 #define GIC_H
 
-#include <stdbool.h>
+// #include <stdbool.h>
 #include <utils_def.h>
 
 /* The number of implemented List registers, minus one */

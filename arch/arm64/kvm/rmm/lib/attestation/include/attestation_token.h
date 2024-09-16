@@ -11,13 +11,13 @@
 
 #ifndef ATTESTATION_TOKEN_H
 #define ATTESTATION_TOKEN_H
-
+#define CBMC
 #include <measurement.h>
 #ifndef CBMC
-#include <qcbor/qcbor.h>
+// #include <qcbor/qcbor.h>
 #endif /* CBMC */
-#include <stddef.h>
-#include <stdint.h>
+// #include <stddef.h>
+// #include <stdint.h>
 #ifndef CBMC
 #include <t_cose/q_useful_buf.h>
 #include <t_cose/t_cose_sign_sign.h>

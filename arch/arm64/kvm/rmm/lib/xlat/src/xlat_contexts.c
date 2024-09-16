@@ -7,10 +7,10 @@
 #include <arch_helpers.h>
 //#include <assert.h>
 #include <debug.h>
-#include <errno.h>
+#include <linux/errno.h>
 #include <limits.h>
-#include <stdbool.h>
-#include <stdint.h>
+// #include <stdbool.h>
+// #include <stdint.h>>
 #include <utils_def.h>
 #include <xlat_contexts.h>
 #include <xlat_defs.h>

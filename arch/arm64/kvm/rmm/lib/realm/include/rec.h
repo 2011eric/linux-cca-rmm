@@ -104,40 +104,40 @@ struct ns_state {
 	struct pmu_state *pmu;
 } __attribute__((aligned(CACHE_WRITEBACK_GRANULE)));
 
-/*
- * Data used when handling attestation requests
- */
-struct rec_attest_data {
-	unsigned char rmm_realm_token_buf[SZ_1K];
-	size_t rmm_realm_token_len;
+// /*
+//  * Data used when handling attestation requests
+//  */
+// struct rec_attest_data {
+// 	unsigned char rmm_realm_token_buf[SZ_1K];
+// 	size_t rmm_realm_token_len;
 
-	struct token_sign_cntxt token_sign_ctx;
+// 	struct token_sign_cntxt token_sign_ctx;
 
-	/* Buffer allocation info used for heap init and management */
-	struct buffer_alloc_ctx alloc_ctx;
-};
-COMPILER_ASSERT(sizeof(struct rec_attest_data) <= GRANULE_SIZE);
+// 	/* Buffer allocation info used for heap init and management */
+// 	struct buffer_alloc_ctx alloc_ctx;
+// };
+// COMPILER_ASSERT(sizeof(struct rec_attest_data) <= GRANULE_SIZE);
 
-/*
- * This structure contains pointers to data that are allocated
- * in auxilary granules for a REC.
- */
-struct rec_aux_data {
-	/* Pointer to the heap buffer */
-	uint8_t *attest_heap_buf;
+// /*
+//  * This structure contains pointers to data that are allocated
+//  * in auxilary granules for a REC.
+//  */
+// struct rec_aux_data {
+// 	/* Pointer to the heap buffer */
+// 	uint8_t *attest_heap_buf;
 
-	/* Pointer to PMU state */
-	struct pmu_state *pmu;
+// 	/* Pointer to PMU state */
+// 	struct pmu_state *pmu;
 
-	/* SIMD context region */
-	struct simd_context *simd_ctx;
+// 	/* SIMD context region */
+// 	struct simd_context *simd_ctx;
 
-	/* Pointer to attestation-related data */
-	struct rec_attest_data *attest_data;
+// 	/* Pointer to attestation-related data */
+// 	struct rec_attest_data *attest_data;
 
-	/* Address of the attestation token buffer */
-	uintptr_t cca_token_buf;
-};
+// 	/* Address of the attestation token buffer */
+// 	uintptr_t cca_token_buf;
+// };
 
 struct rec {
 	struct granule *g_rec;	/* the granule in which this REC lives */
@@ -212,7 +212,7 @@ struct rec {
 
 	/* Addresses of auxiliary granules */
 	struct granule *g_aux[MAX_REC_AUX_GRANULES];
-	struct rec_aux_data aux_data;
+	//struct rec_aux_data aux_data;
 	struct {
 		unsigned long vsesr_el2;
 		bool inject;

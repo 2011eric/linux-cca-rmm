@@ -14,8 +14,8 @@
 #include <arch_features.h>
 #include <limits.h>
 #include <memory.h>
-#include <stddef.h>
-#include <stdint.h>
+// #include <stddef.h>
+// #include <stdint.h>>
 
 #endif
 

@@ -8,7 +8,7 @@
 #ifdef CBMC
 
 #include <measurement.h>
-#include <stdbool.h>
+// #include <stdbool.h>
 #include <tb_common.h>
 
 void measurement_data_granule_measure(unsigned char rim_measurement[],

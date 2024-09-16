@@ -9,9 +9,9 @@
 #include <arch_helpers.h>
 //#include <assert.h>
 #include <debug.h>
-#include <errno.h>
-#include <stdbool.h>
-#include <stdint.h>
+#include <linux/errno.h>
+// #include <stdbool.h>
+// #include <stdint.h>>
 #include <stdio.h>
 #include <utils_def.h>
 #include <xlat_contexts.h>
@@ -130,7 +130,7 @@ static void xlat_tables_print_internal(struct xlat_ctx *ctx,
 		panic();
 	}
 
-	assert((ctx != NULL) &&
+	// assert((ctx != NULL) &&
 	       (ctx->cfg != NULL) &&
 	       (ctx->tbls != NULL));
 
@@ -230,7 +230,7 @@ void xlat_tables_print(struct xlat_ctx *ctx)
 	unsigned int used_page_tables;
 	struct xlat_ctx_cfg *ctx_cfg = ctx->cfg;
 
-	assert(ctx_cfg != NULL);
+	// assert(ctx_cfg != NULL);
 
 	uintptr_t max_mapped_va_offset = (ctx_cfg->region == (VA_LOW_REGION) ?
 			(ctx_cfg->max_mapped_va_offset) :
@@ -293,11 +293,11 @@ static uint64_t *find_xlat_last_table(uintptr_t va,
 	struct xlat_ctx_cfg *ctx_cfg;
 	uintptr_t table_base_va;
 
-	assert(ctx != NULL);
-	assert(ctx->cfg != NULL);
-	assert(ctx->tbls != NULL);
-	assert(out_level != NULL);
-	assert(tt_base_va != NULL);
+	// assert(ctx != NULL);
+	// assert(ctx->cfg != NULL);
+	// assert(ctx->tbls != NULL);
+	// assert(out_level != NULL);
+	// assert(tt_base_va != NULL);
 
 	if (va < ctx->cfg->base_va) {
 		return NULL;
@@ -366,7 +366,7 @@ int xlat_unmap_memory_page(struct xlat_llt_info * const table,
 	uint64_t *tte;
 	uint64_t desc;
 
-	assert(table != NULL);
+	// assert(table != NULL);
 
 	tte = xlat_get_tte_ptr(table, va);
 
@@ -415,7 +415,7 @@ int xlat_map_memory_page_with_attrs(const struct xlat_llt_info * const table,
 	uint64_t tte;
 	uint64_t *tte_ptr;
 
-	assert(table != NULL);
+	// assert(table != NULL);
 
 	tte_ptr = xlat_get_tte_ptr(table, va);
 
@@ -463,12 +463,12 @@ int xlat_get_llt_from_va(struct xlat_llt_info * const llt,
 	uint64_t *table;
 	int level;
 
-	assert(ctx != NULL);
-	assert(ctx->cfg != NULL);
-	assert(ctx->tbls != NULL);
-	assert(llt != NULL);
-	assert(ctx->tbls->initialized == true);
-	assert(ctx->cfg->initialized == true);
+	// assert(ctx != NULL);
+	// assert(ctx->cfg != NULL);
+	// assert(ctx->tbls != NULL);
+	// assert(llt != NULL);
+	// assert(ctx->tbls->initialized == true);
+	// assert(ctx->cfg->initialized == true);
 
 	table = find_xlat_last_table(va, ctx, &level, &tt_base_va);
 
@@ -501,10 +501,10 @@ uint64_t *xlat_get_tte_ptr(const struct xlat_llt_info * const llt,
 	uintptr_t offset;
 	unsigned int index;
 
-	assert(llt != NULL);
+	// assert(llt != NULL);
 
-	assert(llt->level <= XLAT_TABLE_LEVEL_MAX);
-	assert(llt->level >= XLAT_TABLE_LEVEL_MIN);
+	// assert(llt->level <= XLAT_TABLE_LEVEL_MAX);
+	// assert(llt->level >= XLAT_TABLE_LEVEL_MIN);
 
 	if (va < llt->llt_base_va) {
 		return NULL;

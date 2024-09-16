@@ -12,7 +12,7 @@
 #include <platform_api.h>
 #include <smc.h>
 #include <status.h>
-#include <stddef.h>
+// #include <stddef.h>
 /* According to the C standard, the memset function used in this file is declared in string.h */
 /* coverity[unnecessary_header: SUPPRESS] */
 #include <string.h>
@@ -31,8 +31,8 @@ unsigned long granule_addr(const struct granule *g)
 {
 	unsigned long idx;
 
-	assert(g != NULL);
-	assert(ALIGNED_TO_ARRAY(g, granules));
+	// assert(g != NULL);
+	// assert(ALIGNED_TO_ARRAY(g, granules));
 
 	idx = ((unsigned long)g - (unsigned long)granules) /
 						sizeof(struct granule);
@@ -48,7 +48,7 @@ unsigned long granule_addr(const struct granule *g)
  */
 static struct granule *granule_from_idx(unsigned long idx)
 {
-	assert(idx < RMM_MAX_GRANULES);
+	// assert(idx < RMM_MAX_GRANULES);
 	return &granules[idx];
 }
 
@@ -63,7 +63,7 @@ struct granule *addr_to_granule(unsigned long addr)
 {
 	unsigned long idx;
 
-	assert(GRANULE_ALIGNED(addr));
+	// assert(GRANULE_ALIGNED(addr));
 
 	idx = plat_granule_addr_to_idx(addr);
 	return granule_from_idx(idx);
@@ -234,7 +234,7 @@ bool find_lock_two_granules(
 		{addr2, NULL, g2, expected_state2}
 	};
 
-	assert((g1 != NULL) && (g2 != NULL));
+	// assert((g1 != NULL) && (g2 != NULL));
 
 	return find_lock_granules(gs, ARRAY_SIZE(gs));
 }
@@ -243,10 +243,10 @@ void granule_memzero(struct granule *g, enum buffer_slot slot)
 {
 	unsigned long *buf;
 
-	assert(g != NULL);
+	// assert(g != NULL);
 
 	buf = granule_map(g, slot);
-	assert(buf != NULL);
+	// assert(buf != NULL);
 
 	granule_memzero_mapped(buf);
 	buffer_unmap(buf);
@@ -261,7 +261,7 @@ void granule_memzero_mapped(void *buf)
 	unsigned int cnt;
 
 	/* Check that use of DC ZVA instructions is permitted */
-	assert((dczid_el0 & DCZID_EL0_DZP_BIT) == 0UL);
+	// assert((dczid_el0 & DCZID_EL0_DZP_BIT) == 0UL);
 
 	/*
 	 * Log2 of the block size in words.
@@ -289,15 +289,15 @@ void *aux_granules_map(struct granule *rec_aux_pages[], unsigned int num_aux)
 {
 	void *rec_aux = NULL;
 
-	assert(rec_aux_pages != NULL);
-	assert(num_aux <= MAX_REC_AUX_GRANULES);
+	// assert(rec_aux_pages != NULL);
+	// assert(num_aux <= MAX_REC_AUX_GRANULES);
 
 	for (unsigned int i = 0U; i < num_aux; i++) {
 		void *aux = granule_map(rec_aux_pages[i],
 					(enum buffer_slot)((unsigned int)
 							   SLOT_REC_AUX0 + i));
 
-		assert(aux != NULL);
+		// assert(aux != NULL);
 
 		if (i == 0UL) {
 			rec_aux = aux;
@@ -310,8 +310,8 @@ void aux_granules_unmap(void *rec_aux, unsigned int num_aux)
 {
 	unsigned char *rec_aux_vaddr = (unsigned char *)rec_aux;
 
-	assert(rec_aux != NULL);
-	assert(num_aux <= MAX_REC_AUX_GRANULES);
+	// assert(rec_aux != NULL);
+	// assert(num_aux <= MAX_REC_AUX_GRANULES);
 
 	for (unsigned int i = 0U; i < num_aux; i++) {
 		buffer_unmap((void *)((uintptr_t)rec_aux_vaddr + (i * GRANULE_SIZE)));

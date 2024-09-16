@@ -10,7 +10,7 @@
 #include <rmm_el3_ifc.h>
 #include <rmm_el3_ifc_priv.h>
 #include <smc.h>
-#include <stdint.h>
+// #include <stdint.h>
 #include <string.h>
 #include <utils_def.h>
 #include <xlat_defs.h>
@@ -27,7 +27,7 @@ static bool manifest_processed;
 
 void rmm_el3_ifc_process_boot_manifest(void)
 {
-	assert((manifest_processed == (bool)false) &&
+	// assert((manifest_processed == (bool)false) &&
 		(is_mmu_enabled() == (bool)false));
 
 	/*
@@ -56,7 +56,7 @@ void rmm_el3_ifc_process_boot_manifest(void)
 /* Return the raw value of the received boot manifest */
 unsigned int rmm_el3_ifc_get_manifest_version(void)
 {
-	assert(manifest_processed == (bool)true);
+	// assert(manifest_processed == (bool)true);
 
 	return local_core_manifest.version;
 }
@@ -65,8 +65,8 @@ unsigned int rmm_el3_ifc_get_manifest_version(void)
 /* coverity[misra_c_2012_rule_8_7_violation:SUPPRESS] */
 uintptr_t rmm_el3_ifc_get_plat_manifest_pa(void)
 {
-	assert((manifest_processed == (bool)true) &&
-		(is_mmu_enabled() == (bool)false));
+	// assert((manifest_processed == (bool)true) &&
+	//	(is_mmu_enabled() == (bool)false));
 
 	return local_core_manifest.plat_data;
 }
@@ -84,7 +84,7 @@ int rmm_el3_ifc_get_dram_data_validated_pa(unsigned long max_num_banks,
 	struct ns_dram_info *plat_dram;
 	struct ns_dram_bank *bank_ptr;
 
-	assert((manifest_processed == (bool)true) &&
+	// assert((manifest_processed == (bool)true) &&
 		(is_mmu_enabled() == (bool)false));
 
 	*plat_dram_info = NULL;

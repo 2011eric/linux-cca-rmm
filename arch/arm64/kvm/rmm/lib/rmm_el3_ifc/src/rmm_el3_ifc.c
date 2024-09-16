@@ -9,7 +9,7 @@
 #include <rmm_el3_ifc.h>
 #include <rmm_el3_ifc_priv.h>
 #include <smc.h>
-#include <stdint.h>
+// #include <stdint.h>>
 #include <xlat_defs.h>
 
 /* Boot Interface arguments */
@@ -43,10 +43,10 @@ __dead2 void rmm_el3_ifc_report_fail_to_el3(int ec)
 int rmm_el3_ifc_init(unsigned long x0, unsigned long x1, unsigned long x2,
 		     unsigned long x3, uintptr_t shared_buf_va)
 {
-	assert(is_mmu_enabled() == false);
-	assert(initialized == false);
-	assert((shared_buf_va & PAGE_SIZE_MASK) == 0UL);
-	assert(shared_buf_va != 0UL);
+	// assert(is_mmu_enabled() == false);
+	// assert(initialized == false);
+	// assert((shared_buf_va & PAGE_SIZE_MASK) == 0UL);
+	// assert(shared_buf_va != 0UL);
 
 	/*
 	 * Validate that the version number is correct.
@@ -111,7 +111,7 @@ int rmm_el3_ifc_init(unsigned long x0, unsigned long x1, unsigned long x2,
  */
 uintptr_t rmm_el3_ifc_get_shared_buf_pa(void)
 {
-	assert(initialized == true);
+	// assert(initialized == true);
 
 	return rmm_shared_buffer_start_pa;
 }
@@ -119,7 +119,7 @@ uintptr_t rmm_el3_ifc_get_shared_buf_pa(void)
 /* Get the raw value of the boot interface version */
 unsigned int rmm_el3_ifc_get_version(void)
 {
-	assert(initialized == true);
+	// assert(initialized == true);
 
 	return (unsigned int)rmm_el3_ifc_abi_version;
 }

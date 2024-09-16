@@ -6,8 +6,8 @@
 //#include <assert.h>
 #include <cpuid.h>
 #include <debug.h>
-#include <errno.h>
-#include <stdint.h>
+#include <linux/errno.h>
+// #include <stdint.h>
 #include <utils_def.h>
 #include <xlat_contexts.h>
 #include <xlat_high_va.h>

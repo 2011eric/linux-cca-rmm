@@ -4,7 +4,7 @@
  * SPDX-FileCopyrightText: Copyright Jon Medhurst <tixy@linaro.org>
  */
 
-#include <stddef.h>
+// #include <stddef.h>
 #include <string.h>
 
 void *memmove(void *dst, const void *src, size_t len)

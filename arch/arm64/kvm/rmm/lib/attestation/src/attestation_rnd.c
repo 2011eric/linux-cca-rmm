@@ -9,12 +9,12 @@
 #include <attestation_priv.h>
 #include <cpuid.h>
 #include <entropy.h>
-#include <errno.h>
+#include <linux/errno.h>
 #include <mbedtls/entropy.h>
 #include <mbedtls/hmac_drbg.h>
 #include <psa/crypto.h>
 #include <simd.h>
-#include <stdbool.h>
+// #include <stdbool.h>
 #include <utils_def.h>
 
 /*

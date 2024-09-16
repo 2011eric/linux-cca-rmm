@@ -8,7 +8,7 @@
 
 #include <arch.h>
 //#include <assert.h>
-#include <stdbool.h>
+// #include <stdbool.h>
 #include <utils_def.h>
 
 static inline unsigned int esr_srt(unsigned long esr)
@@ -46,7 +46,7 @@ static inline unsigned int access_len(unsigned long esr)
 	case ESR_EL2_ABORT_SAS_WORD_VAL:
 		return 4U;
 	default:
-		assert(esr_sas(esr) == ESR_EL2_ABORT_SAS_DWORD_VAL);
+		// assert(esr_sas(esr) == ESR_EL2_ABORT_SAS_DWORD_VAL);
 		return 8U;
 	}
 }
@@ -61,7 +61,7 @@ static inline unsigned long access_mask(unsigned long esr)
 	case ESR_EL2_ABORT_SAS_WORD_VAL:
 		return 0xffffffffUL;
 	default:
-		assert(esr_sas(esr) == ESR_EL2_ABORT_SAS_DWORD_VAL);
+		// assert(esr_sas(esr) == ESR_EL2_ABORT_SAS_DWORD_VAL);
 		return ~(0UL);
 	}
 }

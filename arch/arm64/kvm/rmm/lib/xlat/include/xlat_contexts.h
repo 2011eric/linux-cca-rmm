@@ -11,7 +11,7 @@
 
 #ifndef __ASSEMBLER__
 
-#include <stdbool.h>
+// #include <stdbool.h>
 #include <xlat_defs.h>
 
 /* Enumerator to identify the right address space within a context */

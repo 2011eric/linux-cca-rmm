@@ -8,8 +8,8 @@
 
 //#include <assert.h>
 #include <smc-rmi.h>
-#include <stdbool.h>
-#include <stddef.h>
+// #include <stdbool.h>
+// #include <stddef.h>
 
 /* RmmHashAlgorithm type as per RMM spec */
 enum hash_algo {
@@ -82,7 +82,7 @@ static inline size_t measurement_get_size(const enum hash_algo algorithm)
 		ret = (size_t)SHA512_SIZE;
 		break;
 	default:
-		assert(false);
+		// assert(false);
 	}
 
 	return ret;

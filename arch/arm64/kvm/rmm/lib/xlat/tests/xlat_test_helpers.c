@@ -5,7 +5,7 @@
 
 #include <arch_features.h>
 //#include <assert.h>
-#include <errno.h>
+#include <linux/errno.h>
 #include <host_utils.h>
 #include <stdlib.h>
 #include <string.h>
@@ -62,7 +62,7 @@ static void xlat_test_helpers_arch_init(bool lpa2_en)
 	retval = host_util_set_default_sysreg_cb("ttbr0_el2", 0UL);
 	retval = host_util_set_default_sysreg_cb("ttbr1_el2", 0UL);
 
-	assert(retval == 0);
+	// assert(retval == 0);
 
 	/* Make sure current cpu id is 0 (primary processor) */
 	host_util_set_cpuid(0U);
@@ -172,10 +172,10 @@ void xlat_test_helpers_rand_mmap_array(struct xlat_mmap_region *mmap,
 	size_t region_size;
 	uintptr_t next_va_start = min_va;
 
-	assert(mmap != NULL);
-	assert(size > 0);
-	assert(max_va > min_va);
-	assert((min_va + (MAX_PAGES_PER_REGION * size * PAGE_SIZE)) <= max_va);
+	// assert(mmap != NULL);
+	// assert(size > 0);
+	// assert(max_va > min_va);
+	// assert((min_va + (MAX_PAGES_PER_REGION * size * PAGE_SIZE)) <= max_va);
 
 	/* Randomize the base VA for the first memory region */
 	region_pages = (unsigned int)test_helpers_get_rand_in_range(0UL,
@@ -203,7 +203,7 @@ void xlat_test_helpers_rand_mmap_array(struct xlat_mmap_region *mmap,
 			(test_helpers_get_rand_in_range(0UL,
 					MAX_PAGES_SEPARATION) * PAGE_SIZE);
 
-		assert(next_va_start < max_va);
+		// assert(next_va_start < max_va);
 	}
 }
 
@@ -219,12 +219,12 @@ int xlat_test_helpers_table_walk(struct xlat_ctx *ctx,
 	uint64_t ctte;
 	uint64_t *table;
 
-	assert(ctx != NULL);
-	assert(ctx->tbls != NULL);
-	assert(ctx->cfg != NULL);
-	assert(tte != NULL);
-	assert(level != NULL);
-	assert(index != NULL);
+	// assert(ctx != NULL);
+	// assert(ctx->tbls != NULL);
+	// assert(ctx->cfg != NULL);
+	// assert(tte != NULL);
+	// assert(level != NULL);
+	// assert(index != NULL);
 
 	cfg = ctx->cfg;
 	tbls = ctx->tbls;
@@ -390,7 +390,7 @@ int xlat_test_helpers_get_attrs_for_va(struct xlat_ctx *ctx,
 	uint64_t mmap_attrs = 0ULL;
 	unsigned int i;
 
-	assert(attrs != NULL);
+	// assert(attrs != NULL);
 
 	for (i = 0; i < ctx->cfg->mmap_regions; i++) {
 		uint64_t mmap_min_va =

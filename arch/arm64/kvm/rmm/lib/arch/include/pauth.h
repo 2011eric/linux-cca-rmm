@@ -6,7 +6,7 @@
 #ifndef PAUTH_H
 #define PAUTH_H
 
-#include <stdint.h>
+// #include <stdint.h>
 
 struct pauth_state {
 	uint64_t apiakeylo_el1;

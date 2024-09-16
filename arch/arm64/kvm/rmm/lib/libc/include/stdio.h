@@ -32,7 +32,7 @@
 #define STDIO_H
 
 #include <stdarg.h>
-#include <stddef.h>
+// #include <stddef.h>
 
 
 #ifdef __cplusplus

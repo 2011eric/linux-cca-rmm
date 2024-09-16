@@ -9,7 +9,7 @@
 #ifndef XLAT_TABLES_PRIVATE_H
 #define XLAT_TABLES_PRIVATE_H
 
-#include <stdbool.h>
+// #include <stdbool.h>
 #include <xlat_contexts.h>
 
 /*

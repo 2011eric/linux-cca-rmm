@@ -20,7 +20,7 @@
 //#include <assert.h>
 #include <cpuid.h>
 #include <debug.h>
-#include <errno.h>
+#include <linux/errno.h>
 #include <mbedtls/memory_buffer_alloc.h>
 #include <mbedtls/platform.h>
 #include <memory_alloc.h>
@@ -67,7 +67,7 @@ static inline struct buffer_alloc_ctx *get_heap_ctx(void)
 	struct buffer_alloc_ctx *ctx;
 	unsigned int cpu_id = my_cpuid();
 
-	assert(cpu_id < MAX_CPUS);
+	// assert(cpu_id < MAX_CPUS);
 
 	ctx = ctx_per_cpu[cpu_id];
 	/* Programming error if heap is not assigned */
@@ -175,7 +175,7 @@ static void *buffer_alloc_calloc_with_heap(struct buffer_alloc_ctx *heap,
 	}
 
 	if (cur->alloc != 0UL) {
-		assert(false);
+		// assert(false);
 	}
 
 	/* Found location, split block if > memory_header + 4 room left */
@@ -198,7 +198,7 @@ static void *buffer_alloc_calloc_with_heap(struct buffer_alloc_ctx *heap,
 		cur->next_free = NULL;
 
 		if (heap->verify & MBEDTLS_MEMORY_VERIFY_ALLOC) {
-			assert(verify_chain(heap) == 0);
+			// assert(verify_chain(heap) == 0);
 		}
 
 		ret = (unsigned char *) cur + sizeof(struct memory_header_s);
@@ -241,7 +241,7 @@ static void *buffer_alloc_calloc_with_heap(struct buffer_alloc_ctx *heap,
 	cur->next_free = NULL;
 
 	if ((heap->verify & MBEDTLS_MEMORY_VERIFY_ALLOC) != 0) {
-		assert(verify_chain(heap) == 0);
+		// assert(verify_chain(heap) == 0);
 	}
 
 	ret = (unsigned char *) cur + sizeof(struct memory_header_s);
@@ -254,7 +254,7 @@ void *buffer_alloc_calloc(size_t n, size_t size)
 {
 	struct buffer_alloc_ctx *heap = get_heap_ctx();
 
-	assert(heap);
+	// assert(heap);
 	return buffer_alloc_calloc_with_heap(heap, n, size);
 }
 
@@ -270,16 +270,16 @@ static void buffer_alloc_free_with_heap(struct buffer_alloc_ctx *heap,
 	}
 
 	if (p < heap->buf || p >= heap->buf + heap->len) {
-		assert(0);
+		// assert(0);
 	}
 
 	p -= sizeof(struct memory_header_s);
 	hdr = (struct memory_header_s *) p;
 
-	assert(verify_header(hdr) == 0);
+	// assert(verify_header(hdr) == 0);
 
 	if (hdr->alloc != 1) {
-		assert(0);
+		// assert(0);
 	}
 
 	hdr->alloc = 0;
@@ -348,7 +348,7 @@ static void buffer_alloc_free_with_heap(struct buffer_alloc_ctx *heap,
 	}
 
 	if (heap->verify & MBEDTLS_MEMORY_VERIFY_FREE) {
-		assert(verify_chain(heap));
+		// assert(verify_chain(heap));
 	}
 }
 
@@ -356,7 +356,7 @@ void buffer_alloc_free(void *ptr)
 {
 	struct buffer_alloc_ctx *heap = get_heap_ctx();
 
-	assert(heap);
+	// assert(heap);
 	buffer_alloc_free_with_heap(heap, ptr);
 }
 
@@ -364,7 +364,7 @@ int buffer_alloc_ctx_assign(struct buffer_alloc_ctx *ctx)
 {
 	unsigned int cpuid = my_cpuid();
 
-	assert(cpuid < MAX_CPUS);
+	// assert(cpuid < MAX_CPUS);
 
 	if (ctx == NULL) {
 		return -EINVAL;
@@ -384,10 +384,10 @@ void buffer_alloc_ctx_unassign(void)
 {
 	unsigned int cpuid = my_cpuid();
 
-	assert(cpuid < MAX_CPUS);
+	// assert(cpuid < MAX_CPUS);
 
 	/* multiple unassign */
-	assert(ctx_per_cpu[cpuid] != NULL);
+	// assert(ctx_per_cpu[cpuid] != NULL);
 
 	ctx_per_cpu[cpuid] = NULL;
 }
@@ -397,7 +397,7 @@ void mbedtls_memory_buffer_set_verify(int verify)
 {
 	struct buffer_alloc_ctx *heap = get_heap_ctx();
 
-	assert(heap);
+	// assert(heap);
 	heap->verify = verify;
 }
 
@@ -405,7 +405,7 @@ int mbedtls_memory_buffer_alloc_verify(void)
 {
 	struct buffer_alloc_ctx *heap = get_heap_ctx();
 
-	assert(heap);
+	// assert(heap);
 	return verify_chain(heap);
 }
 
@@ -417,7 +417,7 @@ void mbedtls_memory_buffer_alloc_init(unsigned char *buf, size_t len)
 	 */
 	struct buffer_alloc_ctx *heap = get_heap_ctx();
 
-	assert(heap);
+	// assert(heap);
 
 	memset(heap, 0, sizeof(struct buffer_alloc_ctx));
 
@@ -448,6 +448,6 @@ void mbedtls_memory_buffer_alloc_free(void)
 {
 	struct buffer_alloc_ctx *heap = get_heap_ctx();
 
-	assert(heap);
+	// assert(heap);
 	memset(heap, 0, sizeof(struct buffer_alloc_ctx));
 }

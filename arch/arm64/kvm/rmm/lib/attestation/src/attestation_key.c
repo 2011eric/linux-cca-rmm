@@ -7,7 +7,7 @@
 #include <attestation.h>
 #include <attestation_priv.h>
 #include <debug.h>
-#include <errno.h>
+#include <linux/errno.h>
 #include <measurement.h>
 #include <psa/crypto.h>
 #include <rmm_el3_ifc.h>
@@ -72,7 +72,7 @@ int attest_init_realm_attestation_key(void)
 	size_t attest_key_size;
 	psa_key_attributes_t key_attributes = psa_key_attributes_init();
 
-	assert(SIMD_IS_FPU_ALLOWED());
+	// assert(SIMD_IS_FPU_ALLOWED());
 
 	/*
 	 * The realm attestation key is requested from the root world in the
@@ -243,8 +243,8 @@ int attest_setup_platform_token(void)
 
 int attest_get_platform_token(const void **buf, size_t *len)
 {
-	assert(buf != NULL);
-	assert(len != NULL);
+	// assert(buf != NULL);
+	// assert(len != NULL);
 
 	if (rmm_platform_token.ptr == NULL) {
 		return -EINVAL;

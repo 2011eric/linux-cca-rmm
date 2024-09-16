@@ -7,7 +7,7 @@
 
 #ifdef CBMC
 
-#include <stdbool.h>
+// #include <stdbool.h>
 #include <tb_common.h>
 
 unsigned int rmm_el3_ifc_get_manifest_version(void)

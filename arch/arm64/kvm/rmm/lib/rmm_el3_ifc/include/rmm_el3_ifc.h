@@ -10,7 +10,7 @@
 #include <smc.h>
 
 #ifndef __ASSEMBLER__
-#include <stddef.h>
+// #include <stddef.h>
 #endif
 
 /*************************************

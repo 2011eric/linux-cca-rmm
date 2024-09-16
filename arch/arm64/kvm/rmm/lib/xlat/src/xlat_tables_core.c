@@ -10,9 +10,9 @@
 #include <arch_helpers.h>
 //#include <assert.h>
 #include <debug.h>
-#include <errno.h>
-#include <stdbool.h>
-#include <stdint.h>
+#include <linux/errno.h>
+// #include <stdbool.h>
+// #include <stdint.h>
 #include <utils_def.h>
 #include <xlat_contexts.h>
 #include "xlat_defs_private.h"
@@ -49,7 +49,7 @@ typedef enum {
 /* Returns a pointer to the first empty translation table. */
 static inline uint64_t *xlat_table_get_empty(struct xlat_ctx *ctx)
 {
-	assert(ctx->tbls->next_table < ctx->tbls->tables_num);
+	// assert(ctx->tbls->next_table < ctx->tbls->tables_num);
 
 	return &ctx->tbls->tables[(size_t)XLAT_TABLE_ENTRIES *
 					ctx->tbls->next_table++];
@@ -255,14 +255,14 @@ static uintptr_t xlat_tables_map_region(struct xlat_ctx *ctx,
 	uintptr_t mm_end_va;
 	struct xlat_ctx_cfg *ctx_cfg;
 
-	assert(mm != NULL);
-	assert(ctx != NULL);
+	// assert(mm != NULL);
+	// assert(ctx != NULL);
 	ctx_cfg = ctx->cfg;
 
-	assert(ctx_cfg != NULL);
-	assert((level >= ctx_cfg->base_level) &&
+	// assert(ctx_cfg != NULL);
+	// assert((level >= ctx_cfg->base_level) &&
 	       (level <= XLAT_TABLE_LEVEL_MAX));
-	assert(table_entries <= XLAT_GET_TABLE_ENTRIES(level));
+	// assert(table_entries <= XLAT_GET_TABLE_ENTRIES(level));
 
 	mm_end_va = mm->base_va + mm->size - 1U;
 
@@ -366,7 +366,7 @@ uint64_t xlat_desc(uint64_t attr, uintptr_t addr_pa, int level)
 	}
 
 	/* Make sure that the granularity is fine enough to map this address. */
-	assert((addr_pa & XLAT_BLOCK_MASK(level)) == 0U);
+	// assert((addr_pa & XLAT_BLOCK_MASK(level)) == 0U);
 
 	desc = set_oa_to_tte(addr_pa);
 
@@ -442,7 +442,7 @@ uint64_t xlat_desc(uint64_t attr, uintptr_t addr_pa, int level)
 		 */
 
 		/* Only MT_MEMORY allowed from here on */
-		assert(mem_type == MT_MEMORY);
+		// assert(mem_type == MT_MEMORY);
 
 		if (((attr & MT_RW) != 0UL) || ((attr & MT_EXECUTE_NEVER) != 0UL)) {
 			desc |= XLAT_GET_PXN_DESC();

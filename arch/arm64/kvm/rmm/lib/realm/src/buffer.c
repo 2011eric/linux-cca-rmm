@@ -10,11 +10,11 @@
 #include <buffer_private.h>
 #include <cpuid.h>
 #include <debug.h>
-#include <errno.h>
+#include <linux/errno.h>
 #include <granule.h>
 #include <slot_buf_arch.h>
-#include <stdbool.h>
-#include <stdint.h>
+// #include <stdbool.h>
+// #include <stdint.h>>
 #include <utils_def.h>
 #include <xlat_contexts.h>
 #include <xlat_high_va.h>

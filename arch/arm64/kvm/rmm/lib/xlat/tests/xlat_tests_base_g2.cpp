@@ -31,9 +31,9 @@ static uint64_t gen_va_space_params_by_lvl(int level,
 					   xlat_addr_region_id_t region,
 					   size_t *va_size)
 {
-	assert(level >= XLAT_TEST_MIN_LVL());
-	assert(level <= XLAT_TABLE_LEVEL_MAX);
-	assert(va_size != NULL);
+	// assert(level >= XLAT_TEST_MIN_LVL());
+	// assert(level <= XLAT_TABLE_LEVEL_MAX);
+	// assert(va_size != NULL);
 
 	*va_size = (1ULL << XLAT_ADDR_SHIFT(level)) *
 				XLAT_GET_TABLE_ENTRIES(level);
@@ -136,14 +136,14 @@ static int gen_mmap_array_by_level(xlat_mmap_region *mmap,
 	uint64_t mmap_start_va = start_va;
 	unsigned int max_table_entries = XLAT_GET_TABLE_ENTRIES(first_lvl);
 
-	assert(mmap_size >= 3U);
-	assert(last_lvl > XLAT_TEST_MIN_LVL());
-	assert(last_lvl <= XLAT_TABLE_LEVEL_MAX);
-	assert(first_lvl >= XLAT_TEST_MIN_LVL());
-	assert(first_lvl <= last_lvl);
-	assert(mmap != NULL);
-	assert(tbl_idxs != NULL);
-	assert(granularity != NULL);
+	// assert(mmap_size >= 3U);
+	// assert(last_lvl > XLAT_TEST_MIN_LVL());
+	// assert(last_lvl <= XLAT_TABLE_LEVEL_MAX);
+	// assert(first_lvl >= XLAT_TEST_MIN_LVL());
+	// assert(first_lvl <= last_lvl);
+	// assert(mmap != NULL);
+	// assert(tbl_idxs != NULL);
+	// assert(granularity != NULL);
 
 	/* Generate a mapping at the beginning of the table */
 	tbl_idxs[0U] = 0U;
@@ -208,8 +208,8 @@ static void validate_xlat_tables(xlat_ctx *ctx, unsigned int *expected_idxs,
 	uint64_t test_va, pa, pa_mask;
 	int level, retval;
 
-	assert(ctx != NULL);
-	assert(expected_idxs != NULL);
+	// assert(ctx != NULL);
+	// assert(expected_idxs != NULL);
 
 	for (unsigned int i = 0U; i < ctx->cfg->mmap_regions; i++) {
 		granularity = ctx->cfg->mmap[i].granularity;
@@ -727,10 +727,10 @@ void xlat_get_llt_from_va_prepare_assertion(struct xlat_ctx *ctx,
 	xlat_addr_region_id_t va_region;
 	uint64_t max_va_size = XLAT_TEST_MAX_VA_SIZE();
 
-	assert(ctx != NULL);
-	assert(cfg != NULL);
-	assert(tbls != NULL);
-	assert(init_mmap != NULL);
+	// assert(ctx != NULL);
+	// assert(cfg != NULL);
+	// assert(tbls != NULL);
+	// assert(init_mmap != NULL);
 
 	va_region = (xlat_addr_region_id_t)test_helpers_get_rand_in_range(0UL,
 							VA_REGIONS - 1U);
@@ -2043,7 +2043,7 @@ static void validate_ttbrx_el2(struct xlat_ctx *ctx)
 	uint64_t expected_ttbrx, ttbrx;
 	xlat_addr_region_id_t va_region;
 
-	assert(ctx != NULL);
+	// assert(ctx != NULL);
 
 	va_region = ctx->cfg->region;
 

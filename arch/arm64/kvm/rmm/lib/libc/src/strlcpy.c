@@ -18,7 +18,7 @@
  * OpenBSD: strlcpy.c,v 1.12 2015/01/15 03:54:12 millert Exp $
  */
 
-#include <stdint.h>
+// #include <stdint.h>>
 #include <string.h>
 
 /*

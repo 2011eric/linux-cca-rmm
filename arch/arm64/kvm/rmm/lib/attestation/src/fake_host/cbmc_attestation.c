@@ -8,8 +8,8 @@
 #ifdef CBMC
 
 #include <memory_alloc.h>
-#include <stdbool.h>
-#include <stddef.h>
+// #include <stdbool.h>
+// #include <stddef.h>
 #include <tb_common.h>
 
 int attestation_init(void)

@@ -7,7 +7,7 @@
 
 #ifdef CBMC
 
-#include <stdbool.h>
+// #include <stdbool.h>
 #include <tb_common.h>
 #include <xlat_tables.h>
 

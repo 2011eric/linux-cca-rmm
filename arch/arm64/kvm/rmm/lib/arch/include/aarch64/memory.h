@@ -6,8 +6,8 @@
 #ifndef MEMORY_H
 #define MEMORY_H
 
-#include <stddef.h>
-#include <stdint.h>
+// #include <stddef.h>
+// #include <stdint.h>
 
 /* Single-Copy Atomic 64-bit write */
 static inline void __sca_write64(uint64_t *ptr, uint64_t val)

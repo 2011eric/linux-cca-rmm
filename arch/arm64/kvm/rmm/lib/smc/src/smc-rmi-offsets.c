@@ -4,7 +4,7 @@
  */
 
 #include <smc-rmi.h>
-#include <stddef.h>
+// #include <stddef.h>
 
 COMPILER_ASSERT(sizeof(struct rmi_realm_params) == 0x1000UL);
 COMPILER_ASSERT(U(offsetof(struct rmi_realm_params, flags)) == 0U);

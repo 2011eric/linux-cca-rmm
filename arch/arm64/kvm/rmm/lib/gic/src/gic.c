@@ -8,7 +8,7 @@
 #include <debug.h>
 #include <gic.h>
 #include <smc-rmi.h>
-#include <stdbool.h>
+// #include <stdbool.h>
 #include <string.h>
 
 /* The macros below fall through to case (n - 1) */

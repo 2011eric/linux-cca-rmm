@@ -4,7 +4,7 @@
  */
 
 #include <smc-rsi.h>
-#include <stddef.h>
+// #include <stddef.h>
 #include <utils_def.h>
 
 COMPILER_ASSERT(sizeof(struct rsi_realm_config) == 0x1000UL);
