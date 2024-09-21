@@ -55,20 +55,21 @@ bool kvm_rme_supports_sve(void)
 
 static int rmi_check_version(void)
 {
-	struct arm_smccc_res res;
+	// struct arm_smccc_res res;
+	struct smc_result res;
 	int version_major, version_minor;
 	unsigned long our_version = RMI_ABI_VERSION(RMI_ABI_MAJOR_VERSION,
 						    RMI_ABI_MINOR_VERSION);
 
-	arm_smccc_1_1_invoke(SMC_RMI_VERSION, our_version, &res);
+	// arm_smccc_1_1_invoke(SMC_RMI_VERSION, our_version, &res);
 	invoke_pseudo_rmi(SMC_RMI_VERSION, our_version, 0, 0, 0, 0, 0, &res);
-	if (res.a0 == SMCCC_RET_NOT_SUPPORTED)
+	if (res.x[0] == SMCCC_RET_NOT_SUPPORTED)
 		return -ENXIO;
 
-	version_major = RMI_ABI_VERSION_GET_MAJOR(res.a1);
-	version_minor = RMI_ABI_VERSION_GET_MINOR(res.a1);
+	version_major = RMI_ABI_VERSION_GET_MAJOR(res.x[1]);
+	version_minor = RMI_ABI_VERSION_GET_MINOR(res.x[1]);
 
-	if (res.a1 != our_version) {
+	if (res.x[1] != our_version) {
 		kvm_err("Unsupported RMI ABI (version %d.%d) we support %d\n",
 			version_major, version_minor,
 			RMI_ABI_MAJOR_VERSION);

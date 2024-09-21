@@ -20,6 +20,7 @@ incdir += $(srctree)/$(src)/lib/xlat/include
 incdir += $(srctree)/$(src)/include
 
 ccflags-y += -I$(foreach d, $(incdir), -I$d)
-obj-$(CONFIG_KVM) += core/aarch64/entry.o core/handler.o core/run.o 
-obj-$(CONFIG_KVM) += rmi/feature.o rmi/system.o
-obj-$(CONFIG_KVM) += lib/arch/src/arch_features.o
+obj-$(CONFIG_KVM) += rmm.o
+rmm-y += core/aarch64/entry.o core/handler.o core/run.o 
+rmm-y += rmi/feature.o rmi/system.o
+rmm-y += lib/arch/src/arch_features.o
