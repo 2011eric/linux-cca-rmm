@@ -17,7 +17,7 @@
 	
     .text
 
-SYM_FUNC_START(__rmm_entry)
+SYM_FUNC_START(invoke_pseudo_rmi)
 	/*
 	 * Save Link Register and X4, as per SMCCC v1.2 its value
 	 * must be preserved unless it contains result, as specified
@@ -41,6 +41,6 @@ SYM_FUNC_START(__rmm_entry)
 	ldp	x4, lr, [sp], #16
 
     ret
-SYM_FUNC_END(__rmm_entry)
+SYM_FUNC_END(invoke_pseudo_rmi)
 
 
