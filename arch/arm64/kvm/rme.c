@@ -5,12 +5,11 @@
 
 #include <linux/kvm_host.h>
 #include <linux/hugetlb.h>
-
 #include <asm/kvm_emulate.h>
 #include <asm/kvm_mmu.h>
 #include <asm/rmi_cmds.h>
 #include <asm/virt.h>
-
+#include <asm/rmi_utils.h>
 /************ FIXME: Copied from kvm/hyp/pgtable.c **********/
 #include <asm/kvm_pgtable.h>
 
@@ -62,7 +61,7 @@ static int rmi_check_version(void)
 						    RMI_ABI_MINOR_VERSION);
 
 	arm_smccc_1_1_invoke(SMC_RMI_VERSION, our_version, &res);
-
+	invoke_pseudo_rmi(SMC_RMI_VERSION, our_version, 0, 0, 0, 0, 0, &res);
 	if (res.a0 == SMCCC_RET_NOT_SUPPORTED)
 		return -ENXIO;
 
